@@ -57,6 +57,21 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comm
         return mData.size();
     }
 
+    @Override
+    public void onViewRecycled(CommonViewHolder holder) {
+        holder.onViewRecycled();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(CommonViewHolder holder) {
+        holder.onViewAttachedToWindow();
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(CommonViewHolder holder) {
+        holder.onViewDetachedFromWindow();
+    }
+
     public ComponentAdapter() {
         super();
     }
@@ -123,6 +138,18 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comm
                 return;
             itemComponent.bindView(adapter, t, position);
         }
+
+        public void onViewRecycled() {
+            if (itemComponent != null) itemComponent.onViewRecycled();
+        }
+
+        public void onViewAttachedToWindow() {
+            if (itemComponent != null) itemComponent.onViewAttachedToWindow();
+        }
+
+        public void onViewDetachedFromWindow() {
+            if (itemComponent != null) itemComponent.onViewDetachedFromWindow();
+        }
     }
 
     public interface IDataComponent {
@@ -138,6 +165,29 @@ public class ComponentAdapter extends RecyclerView.Adapter<ComponentAdapter.Comm
         void onViewCreated(View view);
 
         void bindView(RecyclerView.Adapter adapter, IDataComponent t, int position);
+
+        void onViewRecycled();
+
+        void onViewAttachedToWindow();
+
+        void onViewDetachedFromWindow();
+    }
+
+    public static abstract class EmptyItemComponent implements IItemComponent {
+        @Override
+        public void onViewRecycled() {
+
+        }
+
+        @Override
+        public void onViewAttachedToWindow() {
+
+        }
+
+        @Override
+        public void onViewDetachedFromWindow() {
+
+        }
     }
 
     private class ItemComponentManager {

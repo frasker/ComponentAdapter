@@ -11,7 +11,7 @@ import com.example.com.componentadapter.ComponentAdapter;
  * Created by 默默 on 17/9/22.
  */
 
-public class ComponentType0 implements ComponentAdapter.IItemComponent {
+public class ComponentType0 extends ComponentAdapter.EmptyItemComponent {
     private static final String TAG = "ComponentType0";
     private TextView textView;
     @Override
